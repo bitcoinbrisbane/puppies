@@ -5,9 +5,6 @@ import "./IERC721.sol";
 
 //ERC721
 contract DogERC721 is IERC721, Ownable {
-    //function balanceOf(address _owner) public view returns (uint256 _balance);
-    //function ownerOf(uint256 _tokenId) public view returns (address _owner);
-    //function exists(uint256 _tokenId) public view returns (bool _exists);
     
     enum sex {
         Male,
@@ -24,7 +21,8 @@ contract DogERC721 is IERC721, Ownable {
     }
     
     mapping(address => bool) private _writers;
-    mapping(address => uint256) private _tokens;
+    mapping(uint256 => address) private _tokenOwner;
+    mapping(uint256 => address) private _tokenApprovals
 
     Dog[] private _pack;
 
@@ -33,10 +31,13 @@ contract DogERC721 is IERC721, Ownable {
     }
 
     function balanceOf(address _owner) external view returns (uint256 _balance) {
-
+        require(owner != address(0), "Invalid address");
+        return _ownedTokensCount[owner].current();
     }
     
-    function ownerOf(uint256 _tokenId) external view returns (address _owner);
+    function ownerOf(uint256 _tokenId) external view returns (address _owner) {
+        return _tokenOwner[_tokenId];
+    }
     
     function exists(uint256 _tokenId) external view returns (bool _exists);
 
@@ -45,7 +46,7 @@ contract DogERC721 is IERC721, Ownable {
         uint id = _pack.length;
         _pack.push(Dog(name, dob, "", dam, sire, now));
 
-        _tokens[owner] = id;
+        _tokens[id] = owner;
         
         //_mint(_to,id); // Assigns the Token to the Ethereum Address that is specified
     }
