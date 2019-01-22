@@ -1,9 +1,10 @@
 pragma solidity ^0.5.0;
 
 import "./Ownable.sol";
+import "./IERC721.sol";
 
 //ERC721
-contract DogERC721 is Ownable {
+contract DogERC721 is IERC721, Ownable {
     //function balanceOf(address _owner) public view returns (uint256 _balance);
     //function ownerOf(uint256 _tokenId) public view returns (address _owner);
     //function exists(uint256 _tokenId) public view returns (bool _exists);
@@ -30,6 +31,14 @@ contract DogERC721 is Ownable {
     function totalSupply() public view returns(uint256) {
         return _pack.length;
     }
+
+    function balanceOf(address _owner) external view returns (uint256 _balance) {
+
+    }
+    
+    function ownerOf(uint256 _tokenId) external view returns (address _owner);
+    
+    function exists(uint256 _tokenId) external view returns (bool _exists);
 
     //Could make payable
     function add(string memory name, uint256 dob, uint256 dam, uint256 sire, address owner) public {
