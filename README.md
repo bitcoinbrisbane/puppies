@@ -1,4 +1,5 @@
-# puppies
+# DigitalDogs.io
+Digital Dogs Australia uses ERC721 smart contracts to attest the linage of dogs.
 
 ## Contracts
 
