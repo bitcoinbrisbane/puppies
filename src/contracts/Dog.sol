@@ -27,6 +27,10 @@ contract DogERC721 is Ownable {
 
     Dog[] private _pack;
 
+    function totalSupply() public view returns(uint256) {
+        return _pack.length;
+    }
+
     //Could make payable
     function add(string memory name, uint256 dob, uint256 dam, uint256 sire, address owner) public {
         uint id = _pack.length;
