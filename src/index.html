@@ -131,10 +131,36 @@
     <!-- Callout -->
     <section class="callout">
       <div class="container text-center">
-        <h2 class="mx-auto mb-5">Welcome to
-          <em>your</em>
-          next website!</h2>
-        <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/template-overviews/stylish-portfolio/">Download Now!</a>
+        <h2 class="mx-auto mb-5">Register <em>your</em> dog on the blockchain!</h2>
+            <form>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter name">
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Dob</label>
+                  <input type="number" class="form-control" id="dob">
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Dam ID</label>
+                  <input type="number" class="form-control" id="dam" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Sire ID</label>
+                  <input type="number" class="form-control" id="sire" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Owner Public Key</label>
+                  <input type="text" class="form-control" id="sire" placeholder="0x64f1cfb285350f7426b33685ed3c300aaf0937a2">
+                </div>
+
+                <a class="btn btn-primary btn-xl" id="register" >Register</a>
+            </form>
+
       </div>
     </section>
 
@@ -186,8 +212,7 @@
     </a>
 
     <!-- Bootstrap core JavaScript -->
-    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-    <script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
@@ -196,6 +221,14 @@
     <!-- Custom scripts for this template -->
     <script src="js/stylish-portfolio.min.js"></script>
 
-  </body>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
 
+    <script>
+      $(document).ready(function(){
+        $("#register").click(function(){
+          alert("woof");
+        });
+      });
+    </script>
+  </body>
 </html>
