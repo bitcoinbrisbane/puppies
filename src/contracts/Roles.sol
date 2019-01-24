@@ -5,7 +5,7 @@ contract Roles {
     mapping(address => bool) private _writers;
 
     modifier onlyWriters() {
-        require(isWiter(msg.sender), "Only the owner can perform this action");
+        require(isWriter(msg.sender), "Only the owner can perform this action");
         _;
     }
 
