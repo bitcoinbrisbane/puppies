@@ -132,35 +132,36 @@
     <section class="callout">
       <div class="container text-center">
         <h2 class="mx-auto mb-5">Register <em>your</em> dog on the blockchain!</h2>
-            <form>
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter name">
-                </div>
+            <div class="container-fluid">
+              <form>
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name">
+                  </div>
 
-                <div class="form-group">
-                  <label for="name">Dob</label>
-                  <input type="number" class="form-control" id="dob">
-                </div>
+                  <div class="form-group">
+                    <label for="name">Dob</label>
+                    <input type="number" class="form-control" id="dob">
+                  </div>
 
-                <div class="form-group">
-                  <label for="name">Dam ID</label>
-                  <input type="number" class="form-control" id="dam" placeholder="0">
-                </div>
+                  <div class="form-group">
+                    <label for="name">Dam ID</label>
+                    <input type="number" class="form-control" id="dam" placeholder="0">
+                  </div>
 
-                <div class="form-group">
-                  <label for="name">Sire ID</label>
-                  <input type="number" class="form-control" id="sire" placeholder="0">
-                </div>
+                  <div class="form-group">
+                    <label for="name">Sire ID</label>
+                    <input type="number" class="form-control" id="sire" placeholder="0">
+                  </div>
 
-                <div class="form-group">
-                  <label for="name">Owner Public Key</label>
-                  <input type="text" class="form-control" id="sire" placeholder="0x64f1cfb285350f7426b33685ed3c300aaf0937a2">
-                </div>
+                  <div class="form-group">
+                    <label for="name">Owner Public Key</label>
+                    <input type="text" class="form-control" id="sire" placeholder="0x64f1cfb285350f7426b33685ed3c300aaf0937a2">
+                  </div>
 
-                <a class="btn btn-primary btn-xl" id="register" >Register</a>
-            </form>
-
+                  <a class="btn btn-primary btn-xl" id="register" >Register</a>
+              </form>
+            </div>
       </div>
     </section>
 
@@ -202,7 +203,7 @@
             </a>
           </li>
         </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019</p>
+        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019 0xd048d4e2f1d42b3ae4022f2a5e537b97f1ef6526</p>
       </div>
     </footer>
 
@@ -226,7 +227,272 @@
     <script>
       $(document).ready(function(){
         $("#register").click(function(){
-          alert("woof");
+          const eth = new Eth(new Eth.HttpProvider('https://rinkeby.infura.io'));
+
+          eth.getBlockByNumber(45300, true, (err, block) => {
+            console.log(block);
+            alert(block.hash);
+          });
+
+          const abi = [
+          {
+            "constant": false,
+            "inputs": [],
+            "name": "renounceOwnership",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+              {
+                "name": "",
+                "type": "address"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "isOwner",
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": false,
+            "inputs": [
+              {
+                "name": "newOwner",
+                "type": "address"
+              }
+            ],
+            "name": "transferOwnership",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "name": "_from",
+                "type": "address"
+              },
+              {
+                "indexed": true,
+                "name": "_to",
+                "type": "address"
+              },
+              {
+                "indexed": false,
+                "name": "_tokenId",
+                "type": "uint256"
+              }
+            ],
+            "name": "Transfer",
+            "type": "event"
+          },
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "name": "_owner",
+                "type": "address"
+              },
+              {
+                "indexed": true,
+                "name": "_approved",
+                "type": "address"
+              },
+              {
+                "indexed": false,
+                "name": "_tokenId",
+                "type": "uint256"
+              }
+            ],
+            "name": "Approval",
+            "type": "event"
+          },
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "name": "_owner",
+                "type": "address"
+              },
+              {
+                "indexed": true,
+                "name": "_operator",
+                "type": "address"
+              },
+              {
+                "indexed": false,
+                "name": "_approved",
+                "type": "bool"
+              }
+            ],
+            "name": "ApprovalForAll",
+            "type": "event"
+          },
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "name": "previousOwner",
+                "type": "address"
+              }
+            ],
+            "name": "OwnershipRenounced",
+            "type": "event"
+          },
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "name": "previousOwner",
+                "type": "address"
+              },
+              {
+                "indexed": true,
+                "name": "newOwner",
+                "type": "address"
+              }
+            ],
+            "name": "OwnershipTransferred",
+            "type": "event"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "totalSupply",
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [
+              {
+                "name": "_owner",
+                "type": "address"
+              }
+            ],
+            "name": "balanceOf",
+            "outputs": [
+              {
+                "name": "_balance",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [
+              {
+                "name": "_tokenId",
+                "type": "uint256"
+              }
+            ],
+            "name": "ownerOf",
+            "outputs": [
+              {
+                "name": "_owner",
+                "type": "address"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [
+              {
+                "name": "_tokenId",
+                "type": "uint256"
+              }
+            ],
+            "name": "exists",
+            "outputs": [
+              {
+                "name": "_exists",
+                "type": "bool"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": false,
+            "inputs": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "dob",
+                "type": "uint256"
+              },
+              {
+                "name": "dam",
+                "type": "uint256"
+              },
+              {
+                "name": "sire",
+                "type": "uint256"
+              },
+              {
+                "name": "owner",
+                "type": "address"
+              }
+            ],
+            "name": "add",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ]
+
+
+        const dog = eth.contract(abi).at('0xd048d4e2f1d42b3ae4022f2a5e537b97f1ef6526');
+
+        dog.totalSupply().then((totalSupply) => {
+          console.log(totalSupply);
+          alert(totalSupply);
+        });
+
+        //alert("woof");
         });
       });
     </script>
