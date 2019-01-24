@@ -9,4 +9,4 @@ The `dogs` contract is the repository
 
 ## Org contracts
 
-This enforces the rules of the assocation or org.
+This enforces the rules and work flows of the assocation or org.  Each assocation could behave differently and inject into the ERC721 contract.

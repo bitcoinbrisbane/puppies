@@ -22,7 +22,9 @@ contract DogERC721 is IERC721, Ownable {
     
     mapping(address => bool) private _writers;
     mapping(uint256 => address) private _tokenOwner;
-    mapping(uint256 => address) private _tokenApprovals
+    mapping(uint256 => address) private _tokenApprovals;
+
+    mapping(address => uint256) private _ownedTokensCount;
 
     Dog[] private _pack;
 
@@ -31,32 +33,33 @@ contract DogERC721 is IERC721, Ownable {
     }
 
     function balanceOf(address _owner) external view returns (uint256 _balance) {
-        require(owner != address(0), "Invalid address");
-        return _ownedTokensCount[owner].current();
+        require(_owner != address(0), "Invalid address");
+        return _ownedTokensCount[_owner];
     }
     
     function ownerOf(uint256 _tokenId) external view returns (address _owner) {
         return _tokenOwner[_tokenId];
     }
     
-    function exists(uint256 _tokenId) external view returns (bool _exists);
+    function exists(uint256 _tokenId) external view returns (bool _exists) {
+        //TODO:
+        return true;
+    }
 
     //Could make payable
     function add(string memory name, uint256 dob, uint256 dam, uint256 sire, address owner) public {
         uint id = _pack.length;
         _pack.push(Dog(name, dob, "", dam, sire, now));
 
-        _tokens[id] = owner;
-        
-        //_mint(_to,id); // Assigns the Token to the Ethereum Address that is specified
+        _tokenOwner[id] = owner;
     }
-    
-    // function remove(uint256 index) public {
-        
-    // }
     
     modifier onlyWriters() {
         require(_writers[msg.sender] = true, "Not authorised");
         _;
     }
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
+    event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);
+    event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved); 
 }
