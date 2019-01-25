@@ -70,9 +70,8 @@
         <div class="row">
           <div class="col-lg-10 mx-auto">
             <h2 id="totalSupply"></h2>
-            <p class="lead mb-5">This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
-              <a href="https://unsplash.com/">Unsplash</a>!</p>
-            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+            <p class="lead mb-5">Lorem ipsum dolor sit amet, aliquam appareat id est, quodsi senserit disputationi vel ea. Has ei dicat vivendum, oblique equidem in eum, pri prima decore accommodare id. Ex sea vero habeo, an vim ignota ponderum, ancillae pericula per ne. Pri in impedit fuisset. Debitis feugait persecuti pri et, unum possim instructior pri ex, suas prima perfecto vix cu.</p>
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Do</a>
           </div>
         </div>
       </div>
@@ -166,9 +165,8 @@
     <!-- Call to Action -->
     <section class="content-section bg-primary text-white">
       <div class="container text-center">
-        <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-        <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-        <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
+        <h2 class="mb-4">Get in touch</h2>
+        <p>Lorem ipsum dolor sit amet, aliquam appareat id est, quodsi senserit disputationi vel ea. Has ei dicat vivendum, oblique equidem in eum, pri prima decore accommodare id. Ex sea vero habeo, an vim ignota ponderum, ancillae pericula per ne. Pri in impedit fuisset. Debitis feugait persecuti pri et, unum possim instructior pri ex, suas prima perfecto vix cu.</p>
       </div>
     </section>
 
@@ -191,12 +189,12 @@
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
+            <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com/bitcoinbrisbane">
               <i class="icon-social-twitter"></i>
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="#">
+            <a class="social-link rounded-circle text-white" href="https://www.github.com/bitcoinbrisbane">
               <i class="icon-social-github"></i>
             </a>
           </li>
@@ -482,8 +480,26 @@
         //const eth = new Eth(new Eth.HttpProvider('http://digitaldogs.io:8545'));
         const dog = eth.contract(abi).at(contractAddress);
 
-        dog.totalSupply().then((totalSupply) => {
-          $('#totalSupply').text(Number(totalSupply) + ' dogs registered');
+        dog.totalSupply().then((result) => {
+          console.log(result);
+          $('#totalSupply').text(Number(result) + ' dogs registered');
+        });
+
+
+        const tokenABI = [{
+          "constant": true,
+          "inputs": [],
+          "name": "totalSupply",
+          "outputs":[{"name": "","type": "uint256"}],
+          "payable": false,
+          "type": "function",
+        }];
+
+        const token = eth.contract(tokenABI).at('0xd048d4e2f1d42b3ae4022f2a5e537b97f1ef6526');
+
+        token.totalSupply().then((totalSupply) => {
+          // result <BN ...>  4500000
+            console.log(totalSupply);
         });
 
         $("#register").click(function() {
