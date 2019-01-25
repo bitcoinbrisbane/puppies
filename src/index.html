@@ -494,14 +494,6 @@
             console.log(Number(nonce));
 
             const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
-
-            // var result = [];
-            // while (privateKey.length >= 2) {
-            //   result.push(parseInt(privateKey.substring(0, 2), 16));
-            //   privateKey = privateKey.substring(2, privateKey.length);
-            // }
-      
-            //const privateKey = ArrayBuffer.from(, 'hex');
             const addDogFunction = ethAbi.encodeMethod(abi[13], ['Test', '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
 
             const txParams = {
@@ -516,26 +508,9 @@
           
             eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
               console.log('Transaction Hash', txHash);
+              alert('Transaction Hash', txHash);
             });
-
-          // const tx = new EthereumTx(txParams);
-          // tx.sign(result);
-
-          // const serializedTx = tx.serialize();
-          // console.log(serializedTx.toString('hex'));
-
-          // eth.sendTransaction({
-          //   from: '0x64f1Cfb285350f7426B33685ED3c300aAF0937A2',
-          //   gas: 300000,
-          //   data: '0x...',
-          // }, cb);
         });
-
-
-          // eth.getBlockByNumber(45300, true, (err, block) => {
-          //   console.log(block);
-          //   alert(block.hash);
-          // });
         });
       });
     </script>
