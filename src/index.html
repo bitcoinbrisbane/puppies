@@ -221,6 +221,8 @@
     <script src="js/stylish-portfolio.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+    <script type="text/javascript" src="./js/ethjs-abi.min.js"></script>
+    <script type="text/javascript" src="./js/ethjs-signer.min.js"></script>
 
     <script>
       $(document).ready(function() {
@@ -477,7 +479,7 @@
 
         const contractAddress = '0xd048d4e2f1d42b3ae4022f2a5e537b97f1ef6526';
         const eth = new Eth(new Eth.HttpProvider('https://rinkeby.infura.io'));
-        //const eth = new Eth(new Eth.HttpProvider('http://digitaldog.io:8545'));
+        //const eth = new Eth(new Eth.HttpProvider('http://digitaldogs.io:8545'));
         const dog = eth.contract(abi).at(contractAddress);
 
         dog.totalSupply().then((totalSupply) => {
@@ -490,9 +492,17 @@
 
           eth.getTransactionCount(owner).then((nonce) => {
             console.log(Number(nonce));
+
+            const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
+
+            // var result = [];
+            // while (privateKey.length >= 2) {
+            //   result.push(parseInt(privateKey.substring(0, 2), 16));
+            //   privateKey = privateKey.substring(2, privateKey.length);
+            // }
       
-            const privateKey = Buffer.from('cfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00', 'hex');
-            const addDogFunction = Abi.encodeMethod(abi[13], ['Test', '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
+            //const privateKey = ArrayBuffer.from(, 'hex');
+            const addDogFunction = ethAbi.encodeMethod(abi[13], ['Test', '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
 
             const txParams = {
                 nonce: nonce,
@@ -504,24 +514,28 @@
                 chainId: 4
             }
           
-          const tx = new EthereumTx(txParams);
-          tx.sign(privateKey);
+            eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
+              console.log('Transaction Hash', txHash);
+            });
 
-          const serializedTx = tx.serialize();
-          console.log(serializedTx.toString('hex'));
+          // const tx = new EthereumTx(txParams);
+          // tx.sign(result);
 
-          eth.sendTransaction({
-            from: '0x64f1Cfb285350f7426B33685ED3c300aAF0937A2',
-            gas: 300000,
-            data: '0x...',
-          }, cb);
+          // const serializedTx = tx.serialize();
+          // console.log(serializedTx.toString('hex'));
+
+          // eth.sendTransaction({
+          //   from: '0x64f1Cfb285350f7426B33685ED3c300aAF0937A2',
+          //   gas: 300000,
+          //   data: '0x...',
+          // }, cb);
         });
 
 
-          eth.getBlockByNumber(45300, true, (err, block) => {
-            console.log(block);
-            alert(block.hash);
-          });
+          // eth.getBlockByNumber(45300, true, (err, block) => {
+          //   console.log(block);
+          //   alert(block.hash);
+          // });
         });
       });
     </script>
