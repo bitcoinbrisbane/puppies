@@ -519,17 +519,17 @@
 
         $("#register").click(function() {
 
-          //const owner = '0x64f1Cfb285350f7426B33685ED3c300aAF0937A2';
-          var owner = $("#owner").val();
-          console.log(owner);
+          const owner = $("#owner").val();
 
           eth.getTransactionCount(owner).then((nonce) => {
             console.log(Number(nonce));
 
             const name = $("#name").val();
+            const dam = $("#dam").val();
+            const sire = $("#sire").val();
 
             const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
-            const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
+            const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, '1', dam, sire, '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
 
             const txParams = {
                 nonce: nonce,
@@ -542,7 +542,7 @@
             }
           
             eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
-              alert('Transaction Hash' + txHash);
+              alert('Transaction ' + txHash);
             });
         });
         });
