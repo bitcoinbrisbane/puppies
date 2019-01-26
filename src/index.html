@@ -69,10 +69,9 @@
       <div class="container text-center">
         <div class="row">
           <div class="col-lg-10 mx-auto">
-            <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-            <p class="lead mb-5">This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
-              <a href="https://unsplash.com/">Unsplash</a>!</p>
-            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+            <h2 id="totalSupply"></h2>
+            <p class="lead mb-5">Lorem ipsum dolor sit amet, aliquam appareat id est, quodsi senserit disputationi vel ea. Has ei dicat vivendum, oblique equidem in eum, pri prima decore accommodare id. Ex sea vero habeo, an vim ignota ponderum, ancillae pericula per ne. Pri in impedit fuisset. Debitis feugait persecuti pri et, unum possim instructior pri ex, suas prima perfecto vix cu.</p>
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Do</a>
           </div>
         </div>
       </div>
@@ -93,7 +92,7 @@
             <h4>
               <strong>Register</strong>
             </h4>
-            <p class="text-faded mb-0">Looks great on any screen size!</p>
+            <p class="text-faded mb-0">Add your dog to the ethereum blockchain</p>
           </div>
           <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
             <span class="service-icon rounded-circle mx-auto mb-3">
@@ -102,7 +101,7 @@
             <h4>
               <strong>Track</strong>
             </h4>
-            <p class="text-faded mb-0">Freshly redesigned for Bootstrap 4.</p>
+            <p class="text-faded mb-0">Trace an animals lineage</p>
           </div>
           <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
             <span class="service-icon rounded-circle mx-auto mb-3">
@@ -111,9 +110,7 @@
             <h4>
               <strong>Trade</strong>
             </h4>
-            <p class="text-faded mb-0">Millions of users
-              <i class="fas fa-heart"></i>
-              Start Bootstrap!</p>
+            <p class="text-faded mb-0">Trade your dog securely</p>
           </div>
           <div class="col-lg-3 col-md-6">
             <span class="service-icon rounded-circle mx-auto mb-3">
@@ -156,10 +153,10 @@
 
                   <div class="form-group">
                     <label for="name">Owner Public Key</label>
-                    <input type="text" class="form-control" id="sire" placeholder="0x64f1cfb285350f7426b33685ed3c300aaf0937a2">
+                    <input type="text" class="form-control" id="owner" value="0x64f1cfb285350f7426b33685ed3c300aaf0937a2">
                   </div>
 
-                  <a class="btn btn-primary btn-xl" id="register" >Register</a>
+                  <a class="btn btn-primary btn-xl" id="register">Register</a>
               </form>
             </div>
       </div>
@@ -168,9 +165,8 @@
     <!-- Call to Action -->
     <section class="content-section bg-primary text-white">
       <div class="container text-center">
-        <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-        <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-        <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
+        <h2 class="mb-4">Get in touch</h2>
+        <p>Lorem ipsum dolor sit amet, aliquam appareat id est, quodsi senserit disputationi vel ea. Has ei dicat vivendum, oblique equidem in eum, pri prima decore accommodare id. Ex sea vero habeo, an vim ignota ponderum, ancillae pericula per ne. Pri in impedit fuisset. Debitis feugait persecuti pri et, unum possim instructior pri ex, suas prima perfecto vix cu.</p>
       </div>
     </section>
 
@@ -193,17 +189,17 @@
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
+            <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com/bitcoinbrisbane">
               <i class="icon-social-twitter"></i>
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="#">
+            <a class="social-link rounded-circle text-white" href="https://www.github.com/bitcoinbrisbane">
               <i class="icon-social-github"></i>
             </a>
           </li>
         </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019 0xd048d4e2f1d42b3ae4022f2a5e537b97f1ef6526</p>
+        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019 0x02a78ebab43ed4fc7fd863978427937e5e0ea2b8</p>
       </div>
     </footer>
 
@@ -223,18 +219,46 @@
     <script src="js/stylish-portfolio.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+    <script type="text/javascript" src="./js/ethjs-abi.min.js"></script>
+    <script type="text/javascript" src="./js/ethjs-signer.min.js"></script>
 
     <script>
-      $(document).ready(function(){
-        $("#register").click(function(){
-          const eth = new Eth(new Eth.HttpProvider('https://rinkeby.infura.io'));
+      $(document).ready(function() {
 
-          eth.getBlockByNumber(45300, true, (err, block) => {
-            console.log(block);
-            alert(block.hash);
-          });
+        const add_abi = [
+        {
+            "constant": false,
+            "inputs": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "dob",
+                "type": "uint256"
+              },
+              {
+                "name": "dam",
+                "type": "uint256"
+              },
+              {
+                "name": "sire",
+                "type": "uint256"
+              },
+              {
+                "name": "owner",
+                "type": "address"
+              }
+            ],
+            "name": "add",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ]
 
-          const abi = [
+        const abi = [
           {
             "constant": false,
             "inputs": [],
@@ -484,15 +508,43 @@
           }
         ]
 
+        const contractAddress = '0x02a78ebab43ed4fc7fd863978427937e5e0ea2b8';
+        const eth = new Eth(new Eth.HttpProvider('https://rinkeby.infura.io'));
+        //const eth = new Eth(new Eth.HttpProvider('http://digitaldogs.io:8545'));
+        const dog = eth.contract(abi).at(contractAddress);
 
-        const dog = eth.contract(abi).at('0xd048d4e2f1d42b3ae4022f2a5e537b97f1ef6526');
-
-        dog.totalSupply().then((totalSupply) => {
-          console.log(totalSupply);
-          alert(totalSupply);
+        dog.totalSupply().then((result) => {
+          $('#totalSupply').text(result[0].toString() + ' dogs registered');
         });
 
-        //alert("woof");
+        $("#register").click(function() {
+
+          //const owner = '0x64f1Cfb285350f7426B33685ED3c300aAF0937A2';
+          var owner = $("#owner").val();
+          console.log(owner);
+
+          eth.getTransactionCount(owner).then((nonce) => {
+            console.log(Number(nonce));
+
+            const name = $("#name").val();
+
+            const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
+            const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
+
+            const txParams = {
+                nonce: nonce,
+                gasPrice: '0x1406F40', 
+                gasLimit: '0x3D0900',
+                to: contractAddress, 
+                value: '0x00', 
+                data: addDogFunction,
+                chainId: 4
+            }
+          
+            eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
+              alert('Transaction Hash' + txHash);
+            });
+        });
         });
       });
     </script>

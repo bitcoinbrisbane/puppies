@@ -1,6 +1,7 @@
 pragma solidity ^0.5.0;
 
 interface IERC721 {
+  
   event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
   event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);
   event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);  
@@ -9,8 +10,8 @@ interface IERC721 {
   function ownerOf(uint256 _tokenId) external view returns (address _owner);
   function exists(uint256 _tokenId) external view returns (bool _exists);
 
-  // function approve(address _to, uint256 _tokenId) external;
-  // function getApproved(uint256 _tokenId) external view returns (address _operator);
+  function approve(address _to, uint256 _tokenId) external;
+  function getApproved(uint256 _tokenId) external view returns (address _operator);
 
   // function setApprovalForAll(address _operator, bool _approved) external;
   // function isApprovedForAll(address _owner, address _operator) external view returns (bool);
