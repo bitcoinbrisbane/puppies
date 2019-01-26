@@ -221,6 +221,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
     <script type="text/javascript" src="./js/ethjs-abi.min.js"></script>
     <script type="text/javascript" src="./js/ethjs-signer.min.js"></script>
+    <!-- <script type="text/javascript" src="./js/bn.js"></script> -->
 
     <script>
       $(document).ready(function() {
@@ -481,25 +482,8 @@
         const dog = eth.contract(abi).at(contractAddress);
 
         dog.totalSupply().then((result) => {
-          console.log(result);
-          $('#totalSupply').text(Number(result) + ' dogs registered');
-        });
 
-
-        const tokenABI = [{
-          "constant": true,
-          "inputs": [],
-          "name": "totalSupply",
-          "outputs":[{"name": "","type": "uint256"}],
-          "payable": false,
-          "type": "function",
-        }];
-
-        const token = eth.contract(tokenABI).at('0xd048d4e2f1d42b3ae4022f2a5e537b97f1ef6526');
-
-        token.totalSupply().then((totalSupply) => {
-          // result <BN ...>  4500000
-            console.log(totalSupply);
+          $('#totalSupply').text(result[0].toString() + ' dogs registered');
         });
 
         $("#register").click(function() {
@@ -509,8 +493,10 @@
           eth.getTransactionCount(owner).then((nonce) => {
             console.log(Number(nonce));
 
+            const name = $("#name").val();
+
             const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
-            const addDogFunction = ethAbi.encodeMethod(abi[13], ['Test', '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
+            const addDogFunction = ethAbi.encodeMethod(abi[13], [name, '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
 
             const txParams = {
                 nonce: nonce,
@@ -523,8 +509,8 @@
             }
           
             eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
-              console.log('Transaction Hash', txHash);
-              alert('Transaction Hash', txHash);
+              //console.log('Transaction Hash', txHash);
+              alert('Transaction Hash' + txHash);
             });
         });
         });

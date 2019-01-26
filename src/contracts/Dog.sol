@@ -25,8 +25,9 @@ contract DogERC721 is IERC721, Ownable {
     mapping(uint256 => address) private _tokenApprovals;
 
     mapping(address => uint256) private _ownedTokensCount;
+    mapping (address => mapping (address => bool)) private operatorApprovals;
 
-    Dog[] private _pack;
+    Dog[] public _pack;
 
     function totalSupply() public view returns(uint256) {
         return _pack.length;
@@ -42,16 +43,36 @@ contract DogERC721 is IERC721, Ownable {
     }
     
     function exists(uint256 _tokenId) external view returns (bool _exists) {
-        //TODO:
-        return true;
+        address owner = _tokenOwner[_tokenId];
+        return owner != address(0);
     }
 
-    //Could make payable
+    function approve(address _to, uint256 _tokenId) public {
+        address owner = _tokenOwner[_tokenId]; //ownerOf(_tokenId);
+
+        require(_to != owner, "Can not be owner");
+        require(msg.sender == owner || isApprovedForAll(owner, msg.sender), "Invalid");
+
+        _tokenApprovals[_tokenId] = _to;
+        emit Approval(owner, _to, _tokenId);
+    }
+
+    function getApproved(uint256 _tokenId) external view returns (address) {
+        return _tokenApprovals[_tokenId];
+    }
+
+    function isApprovedForAll(address _owner, address _operator) public view returns (bool) {
+        return operatorApprovals[_owner][_operator];
+    }
+
     function add(string memory name, uint256 dob, uint256 dam, uint256 sire, address owner) public {
         uint id = _pack.length;
         _pack.push(Dog(name, dob, "", dam, sire, now));
-
         _tokenOwner[id] = owner;
+    }
+
+    function get(uint _tokenId) public view returns (string memory, uint256) {
+        return (_pack[_tokenId].name, _pack[_tokenId].dob);
     }
     
     modifier onlyWriters() {

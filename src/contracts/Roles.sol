@@ -10,6 +10,7 @@ contract Roles {
     }
 
     function isWriter(address who) public view returns(bool) {
+        require(who != address(0), "Invalid address");
         return _writers[msg.sender];
     }
 }
