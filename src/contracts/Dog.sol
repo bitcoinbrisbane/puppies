@@ -27,7 +27,7 @@ contract DogERC721 is IERC721, Ownable {
     mapping(address => uint256) private _ownedTokensCount;
     mapping (address => mapping (address => bool)) private operatorApprovals;
 
-    Dog[] public _pack;
+    Dog[] external _pack;
 
     function totalSupply() public view returns(uint256) {
         return _pack.length;

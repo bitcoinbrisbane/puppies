@@ -167,9 +167,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.0;\n\ninterface IERC721 {\n  \n  event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);\n  event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);\n  event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);  \n\n  function balanceOf(address _owner) external view returns (uint256 _balance);\n  function ownerOf(uint256 _tokenId) external view returns (address _owner);\n  function exists(uint256 _tokenId) external view returns (bool _exists);\n\n  function approve(address _to, uint256 _tokenId) external;\n  function getApproved(uint256 _tokenId) external view returns (address _operator);\n\n  // function setApprovalForAll(address _operator, bool _approved) external;\n  // function isApprovedForAll(address _owner, address _operator) external view returns (bool);\n\n  // function transferFrom(address _from, address _to, uint256 _tokenId) external;\n  // function safeTransferFrom(address _from, address _to, uint256 _tokenId) external;  \n  // //function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory _data) external;\n}",
-  "sourcePath": "/Users/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IERC721.sol",
+  "sourcePath": "/home/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IERC721.sol",
   "ast": {
-    "absolutePath": "/Users/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IERC721.sol",
+    "absolutePath": "/home/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IERC721.sol",
     "exportedSymbols": {
       "IERC721": [
         344
@@ -912,7 +912,7 @@
     "src": "0:1141:1"
   },
   "legacyAST": {
-    "absolutePath": "/Users/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IERC721.sol",
+    "absolutePath": "/home/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IERC721.sol",
     "exportedSymbols": {
       "IERC721": [
         344
@@ -1660,7 +1660,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-01-25T23:04:21.524Z",
+  "updatedAt": "2019-01-26T01:23:09.821Z",
   "devdoc": {
     "methods": {}
   },
