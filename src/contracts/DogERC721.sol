@@ -7,6 +7,8 @@ import "./SafeMath.sol";
 //ERC721
 contract DogERC721 is IERC721 {
     
+    using SafeMath for uint;
+
     enum Sex {
         Male,
         Female
@@ -41,16 +43,19 @@ contract DogERC721 is IERC721 {
     }
     
     function exists(uint256 _tokenId) external view returns (bool _exists) {
-        //address owner = _tokenOwner[_tokenId];
-        return ownerOf(_tokenId) != address(0);
+        return _tokenOwner[_tokenId] != address(0);
     }
 
-    function ownerOf(uint256 _tokenId) public view returns (address) {
+    function ownerOf(uint256 _tokenId) external view returns (address) {
         return _tokenOwner[_tokenId];
     }
 
+    // function _ownerOf(uint256 _tokenId) internal view returns (address) {
+    //     return _tokenOwner[_tokenId];
+    // }
+
     function approve(address _to, uint256 _tokenId) external {
-        address owner = ownerOf(_tokenId);
+        address owner = _tokenOwner[_tokenId];
 
         require(_to != owner, "Can not be owner");
         require(msg.sender == owner || isApprovedForAll(owner, msg.sender), "Invalid");
@@ -97,6 +102,7 @@ contract DogERC721 is IERC721 {
         uint id = _pack.length;
         _pack.push(Dog(name, dob, microchip, dam, sire, sex, now));
         _tokenOwner[id] = owner;
+        _ownedTokensCount[owner] = _ownedTokensCount[owner].add(1);
     }
 
     // function add(string calldata name, uint256 dob, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
@@ -117,27 +123,27 @@ contract DogERC721 is IERC721 {
     function addTokenTo(address _to, uint256 _tokenId) internal {
         require(_tokenOwner[_tokenId] == address(0));
         _tokenOwner[_tokenId] = _to;
-        _ownedTokensCount[_to] = _ownedTokensCount[_to] + 1;
+        _ownedTokensCount[_to] = _ownedTokensCount[_to].add(1);
     }
 
     function removeTokenFrom(address _from, uint256 _tokenId) internal {
-        require(ownerOf(_tokenId) == _from);
-        _ownedTokensCount[_from] = _ownedTokensCount[_from] - 1;
+        require(_tokenOwner[_tokenId] == _from);
+        _ownedTokensCount[_from] = _ownedTokensCount[_from].sub(1);
         _tokenOwner[_tokenId] = address(0);
     }
 
     function clearApproval(address _owner, uint256 _tokenId) internal {
-        require(ownerOf(_tokenId) == _owner);
+        require(_tokenOwner[_tokenId] == _owner);
 
         if (_tokenApprovals[_tokenId] != address(0)) {
             _tokenApprovals[_tokenId] = address(0);
         }
     }
 
-    modifier onlyDogOwner(uint256 _tokenId) {
-        require(_writers[msg.sender] = true, "Not authorised");
-        _;
-    }
+    // modifier onlyDogOwner(uint256 _tokenId) {
+    //     require(_writers[msg.sender] = true, "Not authorised");
+    //     _;
+    // }
 
     event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
     event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);
