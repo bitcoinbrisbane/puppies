@@ -71,6 +71,9 @@
           <div class="col-lg-10 mx-auto">
             <h2 id="totalSupply"></h2>
             <p class="lead mb-5">Lorem ipsum dolor sit amet, aliquam appareat id est, quodsi senserit disputationi vel ea. Has ei dicat vivendum, oblique equidem in eum, pri prima decore accommodare id. Ex sea vero habeo, an vim ignota ponderum, ancillae pericula per ne. Pri in impedit fuisset. Debitis feugait persecuti pri et, unum possim instructior pri ex, suas prima perfecto vix cu.</p>
+
+            <p>Recently added:  </p>
+
             <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Do</a>
           </div>
         </div>
@@ -142,6 +145,11 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="name">Microchip</label>
+                    <input type="text" class="form-control" id="microchip">
+                  </div>
+
+                  <div class="form-group">
                     <label for="name">Dam ID</label>
                     <input type="number" class="form-control" id="dam" placeholder="0">
                   </div>
@@ -153,7 +161,7 @@
 
                   <div class="form-group">
                     <label for="name">Owner Public Key</label>
-                    <input type="text" class="form-control" id="owner" value="0x64f1cfb285350f7426b33685ed3c300aaf0937a2">
+                    <input type="text" class="form-control" id="owner" value="0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8">
                   </div>
 
                   <a class="btn btn-primary btn-xl" id="register">Register</a>
@@ -189,7 +197,7 @@
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com/bitcoinbrisbane">
+            <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com/digitaldogs_au">
               <i class="icon-social-twitter"></i>
             </a>
           </li>
@@ -199,7 +207,7 @@
             </a>
           </li>
         </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019 0x02a78ebab43ed4fc7fd863978427937e5e0ea2b8</p>
+        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019 0xA0bcF49B1Be80CF2eEE60A7BddFbA60fC8A53693</p>
       </div>
     </footer>
 
@@ -226,7 +234,7 @@
       $(document).ready(function() {
 
         const add_abi = [
-        {
+          {
             "constant": false,
             "inputs": [
               {
@@ -236,6 +244,14 @@
               {
                 "name": "dob",
                 "type": "uint256"
+              },
+              {
+                "name": "microchip",
+                "type": "string"
+              },
+              {
+                "name": "sex",
+                "type": "uint8"
               },
               {
                 "name": "dam",
@@ -252,13 +268,56 @@
             ],
             "name": "add",
             "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
+            "payable": true,
+            "stateMutability": "payable",
             "type": "function"
           }
         ]
 
         const abi = [
+          {
+            "constant": true,
+            "inputs": [
+              {
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "name": "_pack",
+            "outputs": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "dob",
+                "type": "uint256"
+              },
+              {
+                "name": "microchip",
+                "type": "string"
+              },
+              {
+                "name": "dam",
+                "type": "uint256"
+              },
+              {
+                "name": "sire",
+                "type": "uint256"
+              },
+              {
+                "name": "sex",
+                "type": "uint8"
+              },
+              {
+                "name": "timestamp",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
           {
             "constant": false,
             "inputs": [],
@@ -480,12 +539,80 @@
             "constant": false,
             "inputs": [
               {
+                "name": "_to",
+                "type": "address"
+              },
+              {
+                "name": "_tokenId",
+                "type": "uint256"
+              }
+            ],
+            "name": "approve",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [
+              {
+                "name": "_tokenId",
+                "type": "uint256"
+              }
+            ],
+            "name": "getApproved",
+            "outputs": [
+              {
+                "name": "",
+                "type": "address"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [
+              {
+                "name": "_owner",
+                "type": "address"
+              },
+              {
+                "name": "_operator",
+                "type": "address"
+              }
+            ],
+            "name": "isApprovedForAll",
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": false,
+            "inputs": [
+              {
                 "name": "name",
                 "type": "string"
               },
               {
                 "name": "dob",
                 "type": "uint256"
+              },
+              {
+                "name": "microchip",
+                "type": "string"
+              },
+              {
+                "name": "sex",
+                "type": "uint8"
               },
               {
                 "name": "dam",
@@ -502,13 +629,13 @@
             ],
             "name": "add",
             "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
+            "payable": true,
+            "stateMutability": "payable",
             "type": "function"
           }
         ]
 
-        const contractAddress = '0x02a78ebab43ed4fc7fd863978427937e5e0ea2b8';
+        const contractAddress = '0xA0bcF49B1Be80CF2eEE60A7BddFbA60fC8A53693';
         const eth = new Eth(new Eth.HttpProvider('https://rinkeby.infura.io'));
         //const eth = new Eth(new Eth.HttpProvider('http://digitaldogs.io:8545'));
         const dog = eth.contract(abi).at(contractAddress);
@@ -519,24 +646,26 @@
 
         $("#register").click(function() {
 
-          const owner = $("#owner").val();
-
-          eth.getTransactionCount(owner).then((nonce) => {
-            console.log(Number(nonce));
-
+          //Contract owner
+          eth.getTransactionCount('0x64f1cfb285350f7426b33685ed3c300aaf0937a2').then((nonce) => {
+          
             const name = $("#name").val();
+            const dob = $("#dob").val();
+            const microchip = $("#microchip").val();
             const dam = $("#dam").val();
             const sire = $("#sire").val();
+            const sex = 0;
+            const owner = $("#owner").val();
 
             const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
-            const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, '1', dam, sire, '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
+            const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, dob, microchip, dam, sire, sex, owner]);
 
             const txParams = {
                 nonce: nonce,
                 gasPrice: '0x1406F40', 
                 gasLimit: '0x3D0900',
                 to: contractAddress, 
-                value: '0x00',
+                value: '0x00', //'0xE8D4A51000', //'0x00',
                 data: addDogFunction,
                 chainId: 4
             }

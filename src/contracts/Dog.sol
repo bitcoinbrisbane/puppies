@@ -66,12 +66,22 @@ contract DogERC721 is IERC721, Ownable {
         return operatorApprovals[_owner][_operator];
     }
 
-    function add(string memory name, uint256 dob, string memory microchip, Sex sex, uint256 dam, uint256 sire, address owner) public payable {
+    function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
         uint id = _pack.length;
-        _pack.push(Dog(name, dob, microchip,dam, sire, sex, now));
+        _pack.push(Dog(name, dob, microchip, dam, sire, sex, now));
         _tokenOwner[id] = owner;
     }
-    
+
+    // function add(string memory name, uint256 dob, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
+    //     uint id = _pack.length;
+    //     _pack.push(Dog(name, dob, "", dam, sire, sex, now));
+    //     _tokenOwner[id] = owner;
+    // }
+
+    function get(uint256 id) external returns (uint256, string memory, uint256, Sex, uint256, uint256, address) {
+        return (_pack[id].id, _pack[id].name, _pack[id].dob, _pack[id].sex, _pack[id].dam, _pack[id].sire, _pack[id].owner);
+    }
+
     modifier onlyWriters() {
         require(_writers[msg.sender] = true, "Not authorised");
         _;
