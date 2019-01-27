@@ -32,11 +32,5 @@ contract("DogERC721", function(accounts) {
       const actual = await contractInstance.exists(0);
       assert.isTrue(actual, "Should be true");
     });
-  
-    // it("should mint 2000 tokens", async function () {
-    //   await contractInstance.mint(2000);
-    //   const balance = await contractInstance.balanceOf(OWNER);
-    //   assert.equal(Number(balance), 2000, "Balance should be 2000");
-    // });
   });
 });

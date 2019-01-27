@@ -74,7 +74,11 @@ contract DogERC721 is IERC721 {
         return operatorApprovals[_owner][_operator];
     }
     
-    function transferFrom(address _from, address _to, uint256 _tokenId) public {
+    function transferFrom(address _from, address _to, uint256 _tokenId) external {
+        _transferFrom(_from, _to, _tokenId);
+    }
+
+    function _transferFrom(address _from, address _to, uint256 _tokenId) internal {
         require(isApprovedOrOwner(msg.sender, _tokenId));
         require(_from != address(0));
         require(_to != address(0));
@@ -87,11 +91,11 @@ contract DogERC721 is IERC721 {
     }
 
     function safeTransferFrom(address _from, address _to, uint256 _tokenId) external {
-        //safeTransferFrom(_from, _to, _tokenId, "");
+        _transferFrom(_from, _to, _tokenId);
     }
 
     function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes calldata _data) external {
-        transferFrom(_from, _to, _tokenId);
+        _transferFrom(_from, _to, _tokenId);
     }
 
     function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
