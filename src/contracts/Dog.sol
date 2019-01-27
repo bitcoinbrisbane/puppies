@@ -78,8 +78,8 @@ contract DogERC721 is IERC721, Ownable {
     //     _tokenOwner[id] = owner;
     // }
 
-    function get(uint256 id) external returns (uint256, string memory, uint256, Sex, uint256, uint256, address) {
-        return (_pack[id].id, _pack[id].name, _pack[id].dob, _pack[id].sex, _pack[id].dam, _pack[id].sire, _pack[id].owner);
+    function get(uint256 _tokenId) external returns (string memory, uint256, Sex, uint256, uint256, address) {
+        return (_pack[_tokenId].name, _pack[_tokenId].dob, _pack[_tokenId].sex, _pack[_tokenId].dam, _pack[_tokenId].sire, _pack[_tokenId].owner);
     }
 
     modifier onlyWriters() {
