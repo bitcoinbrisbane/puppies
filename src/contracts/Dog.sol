@@ -6,7 +6,7 @@ import "./IERC721.sol";
 //ERC721
 contract DogERC721 is IERC721, Ownable {
     
-    enum sex {
+    enum Sex {
         Male,
         Female
     }
@@ -17,6 +17,7 @@ contract DogERC721 is IERC721, Ownable {
         string microchip;
         uint256 dam;
         uint256 sire;
+        Sex sex;
         uint256 timestamp;
     }
     
@@ -27,7 +28,7 @@ contract DogERC721 is IERC721, Ownable {
     mapping(address => uint256) private _ownedTokensCount;
     mapping (address => mapping (address => bool)) private operatorApprovals;
 
-    Dog[] external _pack;
+    Dog[] public _pack;
 
     function totalSupply() public view returns(uint256) {
         return _pack.length;
@@ -65,14 +66,10 @@ contract DogERC721 is IERC721, Ownable {
         return operatorApprovals[_owner][_operator];
     }
 
-    function add(string memory name, uint256 dob, uint256 dam, uint256 sire, address owner) public {
+    function add(string memory name, uint256 dob, string memory microchip, Sex sex, uint256 dam, uint256 sire, address owner) public payable {
         uint id = _pack.length;
-        _pack.push(Dog(name, dob, "", dam, sire, now));
+        _pack.push(Dog(name, dob, microchip,dam, sire, sex, now));
         _tokenOwner[id] = owner;
-    }
-
-    function get(uint _tokenId) public view returns (string memory, uint256) {
-        return (_pack[_tokenId].name, _pack[_tokenId].dob);
     }
     
     modifier onlyWriters() {
