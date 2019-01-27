@@ -4,7 +4,7 @@ import "./Ownable.sol";
 import "./IERC721.sol";
 
 //ERC721
-contract DogERC721 is IERC721, Ownable {
+contract DogERC721 is IERC721  {
     
     enum Sex {
         Male,
@@ -62,8 +62,26 @@ contract DogERC721 is IERC721, Ownable {
         return _tokenApprovals[_tokenId];
     }
 
+    function setApprovalForAll(address _to, bool _approved) public {
+        require(_to != msg.sender);
+        operatorApprovals[msg.sender][_to] = _approved;
+        emit ApprovalForAll(msg.sender, _to, _approved);
+    }
+
     function isApprovedForAll(address _owner, address _operator) public view returns (bool) {
         return operatorApprovals[_owner][_operator];
+    }
+    
+    function transferFrom(address _from, address _to, uint256 _tokenId) public {
+        require(isApprovedOrOwner(msg.sender, _tokenId));
+        require(_from != address(0));
+        require(_to != address(0));
+
+        clearApproval(_from, _tokenId);
+        removeTokenFrom(_from, _tokenId);
+        addTokenTo(_to, _tokenId);
+
+        emit Transfer(_from, _to, _tokenId);
     }
 
     function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
@@ -78,11 +96,36 @@ contract DogERC721 is IERC721, Ownable {
     //     _tokenOwner[id] = owner;
     // }
 
-    function get(uint256 _tokenId) external returns (string memory, uint256, Sex, uint256, uint256, address) {
-        return (_pack[_tokenId].name, _pack[_tokenId].dob, _pack[_tokenId].sex, _pack[_tokenId].dam, _pack[_tokenId].sire, _pack[_tokenId].owner);
+    function get(uint256 _tokenId) external view returns (string memory, uint256, Sex, uint256, uint256, address) {
+        return (_pack[_tokenId].name, _pack[_tokenId].dob, _pack[_tokenId].sex, _pack[_tokenId].dam, _pack[_tokenId].sire, address(0));
     }
 
-    modifier onlyWriters() {
+    function isApprovedOrOwner(address _spender, uint256 _tokenId) internal view returns (bool) {
+        address owner = _tokenOwner[_tokenId];
+        return (_spender == owner || getApproved(_tokenId) == _spender || isApprovedForAll(owner, _spender);
+    );
+
+    function addTokenTo(address _to, uint256 _tokenId) internal {
+        require(tokenOwner[_tokenId] == address(0));
+        tokenOwner[_tokenId] = _to;
+        ownedTokensCount[_to] = ownedTokensCount[_to].add(1);
+    }
+
+    function removeTokenFrom(address _from, uint256 _tokenId) internal {
+        require(ownerOf(_tokenId) == _from);
+        ownedTokensCount[_from] = ownedTokensCount[_from].sub(1);
+        tokenOwner[_tokenId] = address(0);
+    }
+
+    function clearApproval(address _owner, uint256 _tokenId) internal {
+        require(ownerOf(_tokenId) == _owner);
+
+        if (tokenApprovals[_tokenId] != address(0)) {
+            tokenApprovals[_tokenId] = address(0);
+        }
+    }
+
+    modifier onlyDogOwner(uint256 _tokenId) {
         require(_writers[msg.sender] = true, "Not authorised");
         _;
     }
