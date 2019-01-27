@@ -25,6 +25,13 @@ contract("DogERC721", function(accounts) {
       const actual = await contractInstance.balanceOf(ALICE);
       assert.equal(Number(actual), 1, "Balance should be 1");
     });
+
+    it("should exist", async function () {
+      await contractInstance.add("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
+
+      const actual = await contractInstance.exists(0);
+      assert.isTrue(actual, "Should be true");
+    });
   
     // it("should mint 2000 tokens", async function () {
     //   await contractInstance.mint(2000);

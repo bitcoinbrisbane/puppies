@@ -50,10 +50,6 @@ contract DogERC721 is IERC721 {
         return _tokenOwner[_tokenId];
     }
 
-    // function _ownerOf(uint256 _tokenId) internal view returns (address) {
-    //     return _tokenOwner[_tokenId];
-    // }
-
     function approve(address _to, uint256 _tokenId) external {
         address owner = _tokenOwner[_tokenId];
 
