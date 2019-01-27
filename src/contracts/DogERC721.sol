@@ -2,9 +2,10 @@ pragma solidity ^0.5.0;
 
 import "./Ownable.sol";
 import "./IERC721.sol";
+import "./SafeMath.sol";
 
 //ERC721
-contract DogERC721 is IERC721  {
+contract DogERC721 is IERC721 {
     
     enum Sex {
         Male,
@@ -39,17 +40,17 @@ contract DogERC721 is IERC721  {
         return _ownedTokensCount[_owner];
     }
     
-    function ownerOf(uint256 _tokenId) external view returns (address _owner) {
-        return _tokenOwner[_tokenId];
-    }
-    
     function exists(uint256 _tokenId) external view returns (bool _exists) {
-        address owner = _tokenOwner[_tokenId];
-        return owner != address(0);
+        //address owner = _tokenOwner[_tokenId];
+        return ownerOf(_tokenId) != address(0);
     }
 
-    function approve(address _to, uint256 _tokenId) public {
-        address owner = _tokenOwner[_tokenId]; //ownerOf(_tokenId);
+    function ownerOf(uint256 _tokenId) public view returns (address) {
+        return _tokenOwner[_tokenId];
+    }
+
+    function approve(address _to, uint256 _tokenId) external {
+        address owner = ownerOf(_tokenId);
 
         require(_to != owner, "Can not be owner");
         require(msg.sender == owner || isApprovedForAll(owner, msg.sender), "Invalid");
@@ -58,7 +59,7 @@ contract DogERC721 is IERC721  {
         emit Approval(owner, _to, _tokenId);
     }
 
-    function getApproved(uint256 _tokenId) external view returns (address) {
+    function getApproved(uint256 _tokenId) public view returns (address) {
         return _tokenApprovals[_tokenId];
     }
 
@@ -84,13 +85,21 @@ contract DogERC721 is IERC721  {
         emit Transfer(_from, _to, _tokenId);
     }
 
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) external {
+        //safeTransferFrom(_from, _to, _tokenId, "");
+    }
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes calldata _data) external {
+        transferFrom(_from, _to, _tokenId);
+    }
+
     function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
         uint id = _pack.length;
         _pack.push(Dog(name, dob, microchip, dam, sire, sex, now));
         _tokenOwner[id] = owner;
     }
 
-    // function add(string memory name, uint256 dob, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
+    // function add(string calldata name, uint256 dob, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
     //     uint id = _pack.length;
     //     _pack.push(Dog(name, dob, "", dam, sire, sex, now));
     //     _tokenOwner[id] = owner;
@@ -102,26 +111,26 @@ contract DogERC721 is IERC721  {
 
     function isApprovedOrOwner(address _spender, uint256 _tokenId) internal view returns (bool) {
         address owner = _tokenOwner[_tokenId];
-        return (_spender == owner || getApproved(_tokenId) == _spender || isApprovedForAll(owner, _spender);
-    );
+        return (_spender == owner || getApproved(_tokenId) == _spender || isApprovedForAll(owner, _spender));
+    }
 
     function addTokenTo(address _to, uint256 _tokenId) internal {
-        require(tokenOwner[_tokenId] == address(0));
-        tokenOwner[_tokenId] = _to;
-        ownedTokensCount[_to] = ownedTokensCount[_to].add(1);
+        require(_tokenOwner[_tokenId] == address(0));
+        _tokenOwner[_tokenId] = _to;
+        _ownedTokensCount[_to] = _ownedTokensCount[_to] + 1;
     }
 
     function removeTokenFrom(address _from, uint256 _tokenId) internal {
         require(ownerOf(_tokenId) == _from);
-        ownedTokensCount[_from] = ownedTokensCount[_from].sub(1);
-        tokenOwner[_tokenId] = address(0);
+        _ownedTokensCount[_from] = _ownedTokensCount[_from] - 1;
+        _tokenOwner[_tokenId] = address(0);
     }
 
     function clearApproval(address _owner, uint256 _tokenId) internal {
         require(ownerOf(_tokenId) == _owner);
 
-        if (tokenApprovals[_tokenId] != address(0)) {
-            tokenApprovals[_tokenId] = address(0);
+        if (_tokenApprovals[_tokenId] != address(0)) {
+            _tokenApprovals[_tokenId] = address(0);
         }
     }
 

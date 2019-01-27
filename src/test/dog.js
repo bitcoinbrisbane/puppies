@@ -1,6 +1,6 @@
-const Token = artifacts.require("Dog");
+const Token = artifacts.require("DogERC721");
 
-contract("Dog", function(accounts) {
+contract("DogERC721", function(accounts) {
 
   const OWNER = accounts[0];
   const ALICE = accounts[1];
