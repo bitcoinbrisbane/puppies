@@ -1,12 +1,12 @@
 pragma solidity ^0.5.0;
 
-import "./Ownable.sol";
 import "./IERC721.sol";
 import "./SafeMath.sol";
 import "./IRepository.sol";
+import "./Roles.sol";
 
 //ERC721
-contract DogERC721 { //is IERC721, IRepository 
+contract DogERC721 is IERC721, Roles {
     
     using SafeMath for uint;
 
@@ -33,6 +33,7 @@ contract DogERC721 { //is IERC721, IRepository
     mapping (address => mapping (address => bool)) private operatorApprovals;
 
     Dog[] public _pack;
+    uint256 public fee;
 
     function totalSupply() public view returns(uint256) {
         return _pack.length;
@@ -68,6 +69,7 @@ contract DogERC721 { //is IERC721, IRepository
     function setApprovalForAll(address _to, bool _approved) public {
         require(_to != msg.sender);
         operatorApprovals[msg.sender][_to] = _approved;
+        
         emit ApprovalForAll(msg.sender, _to, _approved);
     }
 
@@ -99,7 +101,7 @@ contract DogERC721 { //is IERC721, IRepository
         _transferFrom(_from, _to, _tokenId);
     }
 
-    function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
+    function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable onlyOwner() {
         uint id = _pack.length;
         _pack.push(Dog(name, dob, microchip, dam, sire, sex, now));
         _tokenOwner[id] = owner;
@@ -117,7 +119,11 @@ contract DogERC721 { //is IERC721, IRepository
     }
 
     function remove(uint256 _tokenId) external {
+        delete _pack[_tokenId];
+    }
 
+    function setFee(uint256 _fee) public onlyOwner() {
+        fee = _fee;
     }
 
     function isApprovedOrOwner(address _spender, uint256 _tokenId) internal view returns (bool) {

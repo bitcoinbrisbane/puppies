@@ -34,26 +34,40 @@
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "remove",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ],
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.5.0;\n\ncontract IRepository {\n    function add(string calldata name, uint256 dob, string calldata microchip, uint256 dam, uint256 sire, address owner) external;\n}",
-  "sourcePath": "/Users/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IRepository.sol",
+  "source": "pragma solidity ^0.5.0;\n\ncontract IRepository {\n    function add(string calldata name, uint256 dob, string calldata microchip, uint256 dam, uint256 sire, address owner) external;\n    //function get(uint256 _tokenId) external returns (string memory, uint256, Sex, uint256, uint256, address);\n    function remove(uint256 _tokenId) external;\n}",
+  "sourcePath": "/home/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IRepository.sol",
   "ast": {
-    "absolutePath": "/Users/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IRepository.sol",
+    "absolutePath": "/home/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IRepository.sol",
     "exportedSymbols": {
       "IRepository": [
-        680
+        715
       ]
     },
-    "id": 681,
+    "id": 716,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 664,
+        "id": 694,
         "literals": [
           "solidity",
           "^",
@@ -69,9 +83,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 680,
+        "id": 715,
         "linearizedBaseContracts": [
-          680
+          715
         ],
         "name": "IRepository",
         "nodeType": "ContractDefinition",
@@ -79,22 +93,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 679,
+            "id": 709,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "add",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 677,
+              "id": 707,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 666,
+                  "id": 696,
                   "name": "name",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "65:20:2",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -103,7 +117,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 665,
+                    "id": 695,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "65:6:2",
@@ -117,10 +131,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 668,
+                  "id": 698,
                   "name": "dob",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "87:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -129,7 +143,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 667,
+                    "id": 697,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "87:7:2",
@@ -143,10 +157,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 670,
+                  "id": 700,
                   "name": "microchip",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "100:25:2",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -155,7 +169,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 669,
+                    "id": 699,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "100:6:2",
@@ -169,10 +183,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 672,
+                  "id": 702,
                   "name": "dam",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "127:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -181,7 +195,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 671,
+                    "id": 701,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "127:7:2",
@@ -195,10 +209,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 674,
+                  "id": 704,
                   "name": "sire",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "140:12:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -207,7 +221,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 673,
+                    "id": 703,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "140:7:2",
@@ -221,10 +235,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 676,
+                  "id": 706,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "154:13:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -233,7 +247,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 675,
+                    "id": 705,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "154:7:2",
@@ -250,36 +264,90 @@
               "src": "64:104:2"
             },
             "returnParameters": {
-              "id": 678,
+              "id": 708,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "177:0:2"
             },
-            "scope": 680,
+            "scope": 715,
             "src": "52:126:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 714,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "remove",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 712,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 711,
+                  "name": "_tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 714,
+                  "src": "311:16:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 710,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "311:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "310:18:2"
+            },
+            "returnParameters": {
+              "id": 713,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "337:0:2"
+            },
+            "scope": 715,
+            "src": "295:43:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 681,
-        "src": "25:155:2"
+        "scope": 716,
+        "src": "25:315:2"
       }
     ],
-    "src": "0:180:2"
+    "src": "0:340:2"
   },
   "legacyAST": {
-    "absolutePath": "/Users/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IRepository.sol",
+    "absolutePath": "/home/lucascullen/GitHub/BitcoinBrisbane/puppies/src/contracts/IRepository.sol",
     "exportedSymbols": {
       "IRepository": [
-        680
+        715
       ]
     },
-    "id": 681,
+    "id": 716,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 664,
+        "id": 694,
         "literals": [
           "solidity",
           "^",
@@ -295,9 +363,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 680,
+        "id": 715,
         "linearizedBaseContracts": [
-          680
+          715
         ],
         "name": "IRepository",
         "nodeType": "ContractDefinition",
@@ -305,22 +373,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 679,
+            "id": 709,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "add",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 677,
+              "id": 707,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 666,
+                  "id": 696,
                   "name": "name",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "65:20:2",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -329,7 +397,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 665,
+                    "id": 695,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "65:6:2",
@@ -343,10 +411,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 668,
+                  "id": 698,
                   "name": "dob",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "87:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -355,7 +423,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 667,
+                    "id": 697,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "87:7:2",
@@ -369,10 +437,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 670,
+                  "id": 700,
                   "name": "microchip",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "100:25:2",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -381,7 +449,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 669,
+                    "id": 699,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "100:6:2",
@@ -395,10 +463,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 672,
+                  "id": 702,
                   "name": "dam",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "127:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -407,7 +475,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 671,
+                    "id": 701,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "127:7:2",
@@ -421,10 +489,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 674,
+                  "id": 704,
                   "name": "sire",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "140:12:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -433,7 +501,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 673,
+                    "id": 703,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "140:7:2",
@@ -447,10 +515,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 676,
+                  "id": 706,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 679,
+                  "scope": 709,
                   "src": "154:13:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -459,7 +527,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 675,
+                    "id": 705,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "154:7:2",
@@ -476,23 +544,77 @@
               "src": "64:104:2"
             },
             "returnParameters": {
-              "id": 678,
+              "id": 708,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "177:0:2"
             },
-            "scope": 680,
+            "scope": 715,
             "src": "52:126:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 714,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "remove",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 712,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 711,
+                  "name": "_tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 714,
+                  "src": "311:16:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 710,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "311:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "310:18:2"
+            },
+            "returnParameters": {
+              "id": 713,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "337:0:2"
+            },
+            "scope": 715,
+            "src": "295:43:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 681,
-        "src": "25:155:2"
+        "scope": 716,
+        "src": "25:315:2"
       }
     ],
-    "src": "0:180:2"
+    "src": "0:340:2"
   },
   "compiler": {
     "name": "solc",
@@ -500,7 +622,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-01-27T12:21:09.785Z",
+  "updatedAt": "2019-01-29T04:22:57.658Z",
   "devdoc": {
     "methods": {}
   },

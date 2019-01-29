@@ -145,9 +145,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="name">Sex</label>
-                    <input type="radio" name="gender" value="male"> Male<br>
-                    <input type="radio" name="gender" value="female"> Female<br>
+                    <label class="radio-inline"><input type="radio" name="sex" value="0"/> Male </label>
+                    <label class="radio-inline"><input type="radio" name="sex" value="1"/> Female </label>
                   </div> 
 
                   <div class="form-group">
@@ -208,7 +207,7 @@
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="https://www.github.com/bitcoinbrisbane">
+            <a class="social-link rounded-circle text-white" href="https://www.github.com/digitaldogs">
               <i class="icon-social-github"></i>
             </a>
           </li>
@@ -660,7 +659,7 @@
             const microchip = $("#microchip").val();
             const dam = $("#dam").val();
             const sire = $("#sire").val();
-            const sex = 0;
+            const sex = $('input[name=sex]:checked').val();
             const owner = $("#owner").val();
 
             const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
