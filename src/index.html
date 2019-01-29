@@ -653,10 +653,7 @@
 
           //Contract owner
           eth.getTransactionCount('0x64f1cfb285350f7426b33685ed3c300aaf0937a2').then((nonce) => {
-
-            const namex = document.getElementById('name').value;
-            alert(namex);
-
+            
             const name = document.getElementById('name').value;
             const dob = document.getElementById('dob').value;
             const microchip = document.getElementById('microchip').value;
@@ -678,9 +675,9 @@
                 chainId: 4
             }
           
-            // eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
-            //   alert('Transaction ' + txHash);
-            // });
+            eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
+              alert('Transaction ' + txHash);
+            });
         });
         });
       });
