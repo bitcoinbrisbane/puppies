@@ -32,5 +32,12 @@ contract("DogERC721", function(accounts) {
       const actual = await contractInstance.exists(0);
       assert.isTrue(actual, "Should be true");
     });
+
+    it("should get owner of", async function () {
+      await contractInstance.add("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
+
+      const actual = await contractInstance.ownerOf(ALICE);
+      assert.equal(actual, ALICE, "Owner should be Alice");
+    });
   });
 });

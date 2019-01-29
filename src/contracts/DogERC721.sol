@@ -3,9 +3,10 @@ pragma solidity ^0.5.0;
 import "./Ownable.sol";
 import "./IERC721.sol";
 import "./SafeMath.sol";
+import "./IRepository.sol";
 
 //ERC721
-contract DogERC721 is IERC721 {
+contract DogERC721 { //is IERC721, IRepository 
     
     using SafeMath for uint;
 
@@ -113,6 +114,10 @@ contract DogERC721 is IERC721 {
 
     function get(uint256 _tokenId) external view returns (string memory, uint256, Sex, uint256, uint256, address) {
         return (_pack[_tokenId].name, _pack[_tokenId].dob, _pack[_tokenId].sex, _pack[_tokenId].dam, _pack[_tokenId].sire, address(0));
+    }
+
+    function remove(uint256 _tokenId) external {
+
     }
 
     function isApprovedOrOwner(address _spender, uint256 _tokenId) internal view returns (bool) {
