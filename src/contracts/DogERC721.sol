@@ -69,7 +69,7 @@ contract DogERC721 is IERC721, Roles {
     function setApprovalForAll(address _to, bool _approved) public {
         require(_to != msg.sender);
         operatorApprovals[msg.sender][_to] = _approved;
-        
+
         emit ApprovalForAll(msg.sender, _to, _approved);
     }
 
@@ -102,6 +102,7 @@ contract DogERC721 is IERC721, Roles {
     }
 
     function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable onlyOwner() {
+        require(msg.value => fee, "Fee too small");
         uint id = _pack.length;
         _pack.push(Dog(name, dob, microchip, dam, sire, sex, now));
         _tokenOwner[id] = owner;
