@@ -1,6 +1,6 @@
-const Token = artifacts.require("Dog");
+const Token = artifacts.require("DogERC721");
 
-contract("Dog", function(accounts) {
+contract("DogERC721", function(accounts) {
 
   const OWNER = accounts[0];
   const ALICE = accounts[1];
@@ -19,15 +19,25 @@ contract("Dog", function(accounts) {
       assert.equal(Number(actual), 1, "Total supply should be 1");
     });
   
-    // it("owner balance should be 0", async function () {
-    //   const actual = await contractInstance.balanceOf(OWNER);
-    //   assert.equal(Number(actual), 0, "Balance should be 0");
-    // });
-  
-    // it("should mint 2000 tokens", async function () {
-    //   await contractInstance.mint(2000);
-    //   const balance = await contractInstance.balanceOf(OWNER);
-    //   assert.equal(Number(balance), 2000, "Balance should be 2000");
-    // });
+    it("should get balance of to be 1", async function () {
+      await contractInstance.add("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
+
+      const actual = await contractInstance.balanceOf(ALICE);
+      assert.equal(Number(actual), 1, "Balance should be 1");
+    });
+
+    it("should exist", async function () {
+      await contractInstance.add("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
+
+      const actual = await contractInstance.exists(0);
+      assert.isTrue(actual, "Should be true");
+    });
+
+    it("should get owner of", async function () {
+      await contractInstance.add("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
+
+      const actual = await contractInstance.ownerOf(ALICE);
+      assert.equal(actual, ALICE, "Owner should be Alice");
+    });
   });
 });
