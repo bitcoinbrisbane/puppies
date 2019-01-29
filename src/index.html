@@ -653,14 +653,17 @@
 
           //Contract owner
           eth.getTransactionCount('0x64f1cfb285350f7426b33685ed3c300aaf0937a2').then((nonce) => {
-          
-            const name = $("#name").val();
-            const dob = $("#dob").val();
-            const microchip = $("#microchip").val();
-            const dam = $("#dam").val();
-            const sire = $("#sire").val();
+
+            const namex = document.getElementById('name').value;
+            alert(namex);
+
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const microchip = document.getElementById('microchip').value;
+            const dam = document.getElementById('dam').value;
+            const sire = document.getElementById('sire').value;
             const sex = $('input[name=sex]:checked').val();
-            const owner = $("#owner").val();
+            const owner = document.getElementById('owner').value;
 
             const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
             const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, dob, microchip, dam, sire, sex, owner]);
@@ -675,9 +678,9 @@
                 chainId: 4
             }
           
-            eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
-              alert('Transaction ' + txHash);
-            });
+            // eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
+            //   alert('Transaction ' + txHash);
+            // });
         });
         });
       });
