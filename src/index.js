@@ -26,7 +26,8 @@ app.get('/home', (req, res) => {
 
 app.get('/', (req, res) => {
     res.render('index.hbs', {
-        contractAddress: "0xA0bcF49B1Be80CF2eEE60A7BddFbA60fC8A53693"
+        contractAddress: "0xA0bcF49B1Be80CF2eEE60A7BddFbA60fC8A53693",
+        copyright: new Date().getFullYear()
     });
 });
 
