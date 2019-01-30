@@ -1,4 +1,4 @@
-const settings = require('./settings.json');
+//const settings = require('./settings.json');
 const express = require('express');
 const hbs = require('hbs');
 
@@ -24,8 +24,10 @@ app.get('/home', (req, res) => {
     });
 });
 
-app.get('/index', (req, res) => {
-    res.render('index.hbs')
+app.get('/', (req, res) => {
+    res.render('index.hbs', {
+        contractAddress: "0xA0bcF49B1Be80CF2eEE60A7BddFbA60fC8A53693"
+    });
 });
 
 app.listen(3001);
