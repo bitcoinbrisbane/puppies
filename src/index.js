@@ -10,7 +10,12 @@ var app = express();
 //app.use(express.json());
 
 app.set('view engine', 'hbs');
-app.use(express.static(__dirname + '/public'))
+
+app.use(express.static(__dirname + '/css'));
+app.use(express.static(__dirname + '/img'));
+app.use(express.static(__dirname + '/js'));
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/vendor'));
 
 app.get('/home', (req, res) => {
     res.send({
