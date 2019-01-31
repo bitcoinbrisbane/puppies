@@ -22,7 +22,7 @@ contract Roles is Ownable {
     }
 
     modifier onlyWriters() {
-        require(isWriter(msg.sender), "Only the owner can perform this action");
+        require(isWriter(msg.sender) || isOwner(), "Only the owner can perform this action");
         _;
     }
 }

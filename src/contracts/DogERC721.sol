@@ -109,17 +109,11 @@ contract DogERC721 is IERC721, Roles {
         _ownedTokensCount[owner] = _ownedTokensCount[owner].add(1);
     }
 
-    // function add(string calldata name, uint256 dob, Sex sex, uint256 dam, uint256 sire, address owner) external payable {
-    //     uint id = _pack.length;
-    //     _pack.push(Dog(name, dob, "", dam, sire, sex, now));
-    //     _tokenOwner[id] = owner;
-    // }
-
     function get(uint256 _tokenId) external view returns (string memory, uint256, Sex, uint256, uint256, address) {
         return (_pack[_tokenId].name, _pack[_tokenId].dob, _pack[_tokenId].sex, _pack[_tokenId].dam, _pack[_tokenId].sire, address(0));
     }
 
-    function remove(uint256 _tokenId) external {
+    function remove(uint256 _tokenId) external onlyOwner() {
         delete _pack[_tokenId];
     }
 
@@ -151,11 +145,6 @@ contract DogERC721 is IERC721, Roles {
             _tokenApprovals[_tokenId] = address(0);
         }
     }
-
-    // modifier onlyDogOwner(uint256 _tokenId) {
-    //     require(_writers[msg.sender] = true, "Not authorised");
-    //     _;
-    // }
 
     event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
     event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);

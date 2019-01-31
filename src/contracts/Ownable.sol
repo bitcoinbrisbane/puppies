@@ -4,10 +4,7 @@ contract Ownable {
     address private _owner;
 
     event OwnershipRenounced(address indexed previousOwner);
-    event OwnershipTransferred(
-        address indexed previousOwner,
-        address indexed newOwner
-    );
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     constructor() public {
         _owner = msg.sender;
