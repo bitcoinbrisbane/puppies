@@ -39,5 +39,12 @@ contract("DogERC721", function(accounts) {
       const actual = await contractInstance.ownerOf(ALICE);
       assert.equal(actual, ALICE, "Owner should be Alice");
     });
+
+    it("should set fee", async function () {
+      await contractInstance.setFee(1);
+
+      const actual = await contractInstance.fee();
+      assert.equal(actual, 1, "Fee should be 1");
+    });
   });
 });
