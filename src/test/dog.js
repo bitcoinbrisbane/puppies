@@ -8,7 +8,7 @@ contract("DogERC721", function(accounts) {
 
   let contractInstance;
   
-  describe('Contract with zero AUD', () => {
+  describe('Dog functions', () => {
 
     beforeEach(async () => ( contractInstance = await Token.new(0) ));
     
