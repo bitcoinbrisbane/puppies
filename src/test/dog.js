@@ -1,6 +1,6 @@
-const Token = artifacts.require("DogERC721");
+const Token = artifacts.require("DogERC721Metadata");
 
-contract("DogERC721", function(accounts) {
+contract("DogERC721Metadata", function(accounts) {
 
   const OWNER = accounts[0];
   const ALICE = accounts[1];
@@ -10,7 +10,7 @@ contract("DogERC721", function(accounts) {
   
   describe('Dog functions', () => {
 
-    beforeEach(async () => ( contractInstance = await Token.new(0) ));
+    beforeEach(async () => ( contractInstance = await Token.new("Beagles", "DDA") ));
     
     it("should add new dog", async function () {
       await contractInstance.add("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);

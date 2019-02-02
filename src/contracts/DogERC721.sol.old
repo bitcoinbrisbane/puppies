@@ -8,27 +8,27 @@ import "./Roles.sol";
 //ERC721
 contract DogERC721 is ERC721, Roles {
     
-    using SafeMath for uint;
+    // using SafeMath for uint;
 
-    enum Sex {
-        Male,
-        Female
-    }
+    // enum Sex {
+    //     Male,
+    //     Female
+    // }
     
-    struct Dog {
-        string name;
-        uint256 dob;
-        string microchip;
-        uint256 dam;
-        uint256 sire;
-        Sex sex;
-        uint256 timestamp;
-    }
+    // struct Dog {
+    //     string name;
+    //     uint256 dob;
+    //     string microchip;
+    //     uint256 dam;
+    //     uint256 sire;
+    //     Sex sex;
+    //     uint256 timestamp;
+    // }
     
-    mapping(address => bool) private _writers;
+    // mapping(address => bool) private _writers;
 
-    Dog[] public _pack;
-    uint256 public fee;
+    // Dog[] public _pack;
+    // uint256 public fee;
 
     function totalSupply() public view returns(uint256) {
         return _pack.length;
