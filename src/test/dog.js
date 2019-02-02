@@ -34,7 +34,7 @@ contract("DogERC721Metadata", function(accounts) {
     });
 
     it("should get owner of", async function () {
-      await contractInstance.add("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
+      await contractInstance.addPuppy("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
 
       const actual = await contractInstance.ownerOf(ALICE);
       assert.equal(actual, ALICE, "Owner should be Alice");
