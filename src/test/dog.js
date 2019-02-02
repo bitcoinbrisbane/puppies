@@ -26,17 +26,10 @@ contract("DogERC721Metadata", function(accounts) {
       assert.equal(Number(actual), 1, "Balance should be 1");
     });
 
-    it("should exist", async function () {
-      await contractInstance.addPuppy("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
-
-      const actual = await contractInstance.exists(0);
-      assert.isTrue(actual, "Should be true");
-    });
-
     it("should get owner of", async function () {
       await contractInstance.addPuppy("Forrest", 0, "CHIP1", 0, 0, 0, ALICE);
 
-      const actual = await contractInstance.ownerOf(ALICE);
+      const actual = await contractInstance.ownerOf(0);
       assert.equal(actual, ALICE, "Owner should be Alice");
     });
 
