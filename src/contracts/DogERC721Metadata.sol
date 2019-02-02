@@ -4,6 +4,7 @@ import "./ERC721.sol";
 import "./IERC721Metadata.sol";
 import "./ERC165.sol";
 import "./Ownable.sol";
+import "./SafeMath.sol";
 
 contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
     using SafeMath for uint;
@@ -70,7 +71,7 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
         return _pack.length;
     }
 
-    function add(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable onlyOwner() {
+    function addPuppy(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable onlyOwner() {
         require(msg.value >= fee, "Fee too small");
         uint id = _pack.length;
         _pack.push(Dog(name, dob, microchip, dam, sire, sex, now));
@@ -81,11 +82,11 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
         emit PuppyAdded(id);
     }
 
-    function get(uint256 _tokenId) external view returns (string memory, uint256, Sex, uint256, uint256, address) {
+    function getPuppy(uint256 _tokenId) external view returns (string memory, uint256, Sex, uint256, uint256, address) {
         return (_pack[_tokenId].name, _pack[_tokenId].dob, _pack[_tokenId].sex, _pack[_tokenId].dam, _pack[_tokenId].sire, address(0));
     }
 
-    function remove(uint256 _tokenId) external onlyOwner() {
+    function removePuppy(uint256 _tokenId) external onlyOwner() {
         delete _pack[_tokenId];
     }
 
