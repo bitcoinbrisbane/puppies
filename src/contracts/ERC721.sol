@@ -4,19 +4,17 @@ import "./IERC721.sol";
 import "./IERC721Receiver.sol";
 import "./SafeMath.sol";
 import "./Address.sol";
-import "./Counters.sol";
 import "./ERC165.sol";
 
 contract ERC721 is ERC165, IERC721 {
     using SafeMath for uint256;
     using Address for address;
-    using Counters for Counters.Counter;
 
     bytes4 private constant _ERC721_RECEIVED = 0x150b7a02;
 
     mapping (uint256 => address) internal _tokenOwner;
     mapping (uint256 => address) internal _tokenApprovals;
-    mapping (address => Counters.Counter) internal _ownedTokensCount;
+    mapping (address => uint256) internal _ownedTokensCount;
     mapping (address => mapping (address => bool)) internal _operatorApprovals;
 
     bytes4 private constant _INTERFACE_ID_ERC721 = 0x80ac58cd;
@@ -40,7 +38,7 @@ contract ERC721 is ERC165, IERC721 {
 
     function balanceOf(address owner) public view returns (uint256) {
         require(owner != address(0), "Invalid address");
-        return _ownedTokensCount[owner].current();
+        return _ownedTokensCount[owner];
     }
 
     function ownerOf(uint256 tokenId) public view returns (address) {
@@ -103,7 +101,7 @@ contract ERC721 is ERC165, IERC721 {
         require(!_exists(tokenId), "Token does not exist");
 
         _tokenOwner[tokenId] = to;
-        _ownedTokensCount[to].increment();
+        _ownedTokensCount[to].add(1);
 
         emit Transfer(address(0), to, tokenId);
     }
@@ -113,7 +111,7 @@ contract ERC721 is ERC165, IERC721 {
 
         _clearApproval(tokenId);
 
-        _ownedTokensCount[owner].decrement();
+        _ownedTokensCount[owner].sub(1);
         _tokenOwner[tokenId] = address(0);
 
         emit Transfer(owner, address(0), tokenId);
@@ -129,8 +127,8 @@ contract ERC721 is ERC165, IERC721 {
 
         _clearApproval(tokenId);
 
-        _ownedTokensCount[from].decrement();
-        _ownedTokensCount[to].increment();
+        _ownedTokensCount[from].sub(1);
+        _ownedTokensCount[to].add(1);
 
         _tokenOwner[tokenId] = to;
 
