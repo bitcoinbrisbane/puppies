@@ -26,16 +26,11 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
     
     mapping(address => bool) private _writers;
 
-    Dog[] public _pack;
+    Dog[] public pack;
     uint256 public fee;
 
-    // Token name
     string private _name;
-
-    // Token symbol
     string private _symbol;
-
-    // Optional mapping for token URIs
     mapping(uint256 => string) private _tokenURIs;
 
     bytes4 private constant _INTERFACE_ID_ERC721_METADATA = 0x5b5e139f;
@@ -46,9 +41,10 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
      *     bytes4(keccak256('tokenURI(uint256)'))
      */
 
-    constructor (string memory name, string memory symbol) public {
-        _name = name;
-        _symbol = symbol;
+    //constructor (string memory name, string memory symbol) public {
+    constructor () public {
+        _name = "BEAGLES"; //name;
+        _symbol = "DDA"; //symbol;
 
         // register the supported interfaces to conform to ERC721 via ERC165
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
@@ -67,14 +63,14 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
         return _tokenURIs[tokenId];
     }
 
-       function totalSupply() public view returns(uint256) {
-        return _pack.length;
+    function totalSupply() public view returns(uint256) {
+        return pack.length;
     }
 
     function addPuppy(string calldata dogsName, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable onlyOwner() {
         require(msg.value >= fee, "Fee too small");
-        uint id = _pack.length;
-        _pack.push(Dog(dogsName, dob, microchip, dam, sire, sex, now));
+        uint id = pack.length;
+        pack.push(Dog(dogsName, dob, microchip, dam, sire, sex, now));
 
         _tokenOwner[id] = owner;
         _ownedTokensCount[owner] = _ownedTokensCount[owner].add(1);
@@ -83,11 +79,17 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
     }
 
     function getPuppy(uint256 _tokenId) external view returns (string memory, uint256, Sex, uint256, uint256, address) {
-        return (_pack[_tokenId].name, _pack[_tokenId].dob, _pack[_tokenId].sex, _pack[_tokenId].dam, _pack[_tokenId].sire, address(0));
+        return (pack[_tokenId].name, pack[_tokenId].dob, pack[_tokenId].sex, pack[_tokenId].dam, pack[_tokenId].sire, address(0));
     }
 
     function removePuppy(uint256 _tokenId) external onlyOwner() {
-        delete _pack[_tokenId];
+        delete pack[_tokenId];
+
+        emit PuppyRemoved(_tokenId);
+    }
+
+    function updateTitle(uint256 _tokenId, string calldata dogsName) external onlyOwner() {
+        pack[_tokenId].name = dogsName;
     }
 
     function setFee(uint256 _fee) public onlyOwner() {
@@ -100,4 +102,5 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
     }
 
     event PuppyAdded(uint _tokenId);
+    event PuppyRemoved(uint _tokenId);
 }
