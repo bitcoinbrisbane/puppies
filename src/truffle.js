@@ -11,7 +11,6 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
@@ -44,14 +43,6 @@ module.exports = {
       //port: 8545,
       network_id: 4,       // Rinkeby's id
       gas: 7000000         // Rinkeby has a lower block limit than mainnet
-
-    },
-
-    // Useful for private networks
-    private: {
-      // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
-      // network_id: 2111,   // This network is yours, in the cloud.
-      // production: true    // Treats this network as if it was a public net. (default: false)
     }
   },
 
