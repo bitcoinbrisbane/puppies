@@ -7,7 +7,7 @@ import "./Ownable.sol";
 import "./SafeMath.sol";
 
 contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
-    using SafeMath for uint;
+    using SafeMath for uint256;
 
     enum Sex {
         Male,
@@ -71,10 +71,10 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
         return _pack.length;
     }
 
-    function addPuppy(string calldata name, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable onlyOwner() {
+    function addPuppy(string calldata dogsName, uint256 dob, string calldata microchip, Sex sex, uint256 dam, uint256 sire, address owner) external payable onlyOwner() {
         require(msg.value >= fee, "Fee too small");
         uint id = _pack.length;
-        _pack.push(Dog(name, dob, microchip, dam, sire, sex, now));
+        _pack.push(Dog(dogsName, dob, microchip, dam, sire, sex, now));
 
         _tokenOwner[id] = owner;
         _ownedTokensCount[owner] = _ownedTokensCount[owner].add(1);
