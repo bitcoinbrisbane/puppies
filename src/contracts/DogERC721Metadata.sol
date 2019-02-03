@@ -75,6 +75,7 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
         _tokenOwner[id] = owner;
         _ownedTokensCount[owner] = _ownedTokensCount[owner].add(1);
 
+        emit Transfer(_owner, owner, id);
         emit PuppyAdded(id);
     }
 
