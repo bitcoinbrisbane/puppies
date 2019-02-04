@@ -1,21 +1,27 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.2;
 
-interface IERC721 {
-  function balanceOf(address _owner) external view returns (uint256 _balance);
-  function ownerOf(uint256 _tokenId) external view returns (address _owner);
-  function exists(uint256 _tokenId) external view returns (bool _exists);
+import "./IERC165.sol";
 
-  function approve(address _to, uint256 _tokenId) external;
-  function getApproved(uint256 _tokenId) external view returns (address _operator);
+/**
+ * @title ERC721 Non-Fungible Token Standard basic interface
+ * @dev see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
+ */
+contract IERC721 is IERC165 {
+    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
+    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
 
-  function setApprovalForAll(address _operator, bool _approved) external;
-  function isApprovedForAll(address _owner, address _operator) external view returns (bool);
+    function balanceOf(address owner) public view returns (uint256 balance);
+    function ownerOf(uint256 tokenId) public view returns (address owner);
 
-  function transferFrom(address _from, address _to, uint256 _tokenId) external;
-  function safeTransferFrom(address _from, address _to, uint256 _tokenId) external;  
-  function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes calldata _data) external;
+    function approve(address to, uint256 tokenId) public;
+    function getApproved(uint256 tokenId) public view returns (address operator);
 
-  event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
-  event Approval(address indexed _owner, address indexed _approved, uint256 _tokenId);
-  event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);  
+    function setApprovalForAll(address operator, bool _approved) public;
+    function isApprovedForAll(address owner, address operator) public view returns (bool);
+
+    function transferFrom(address from, address to, uint256 tokenId) public;
+    function safeTransferFrom(address from, address to, uint256 tokenId) public;
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public;
 }
