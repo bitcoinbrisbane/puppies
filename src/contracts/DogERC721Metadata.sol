@@ -80,7 +80,8 @@ contract DogERC721Metadata is ERC165, ERC721, IERC721Metadata, Ownable {
     }
 
     function getPuppy(uint256 _tokenId) external view returns (string memory, uint256, Sex, uint256, uint256, address) {
-        return (pack[_tokenId].name, pack[_tokenId].dob, pack[_tokenId].sex, pack[_tokenId].dam, pack[_tokenId].sire, address(0));
+        address owner = ownerOf(_tokenId);
+        return (pack[_tokenId].name, pack[_tokenId].dob, pack[_tokenId].sex, pack[_tokenId].dam, pack[_tokenId].sire, owner);
     }
 
     function removePuppy(uint256 _tokenId) external onlyOwner() {
