@@ -14,12 +14,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="./vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.min.css" rel="stylesheet">
+    <link href="./css/stylish-portfolio.min.css" rel="stylesheet">
 
   </head>
 
@@ -32,7 +32,7 @@
     <nav id="sidebar-wrapper">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
-          <a class="js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+          <a class="js-scroll-trigger" href="#page-top">Menu</a>
         </li>
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#page-top">Home</a>
@@ -69,9 +69,13 @@
       <div class="container text-center">
         <div class="row">
           <div class="col-lg-10 mx-auto">
-            <h2 id="totalSupply"></h2>
-            <p class="lead mb-5">Lorem ipsum dolor sit amet, aliquam appareat id est, quodsi senserit disputationi vel ea. Has ei dicat vivendum, oblique equidem in eum, pri prima decore accommodare id. Ex sea vero habeo, an vim ignota ponderum, ancillae pericula per ne. Pri in impedit fuisset. Debitis feugait persecuti pri et, unum possim instructior pri ex, suas prima perfecto vix cu.</p>
-            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Do</a>
+            <h2>What we do <i class="fa fa-paw"></i></h2>
+            <p class="lead mb-5">Here at Digital Dogs Australia, we provide a harmonised digital registry of pedigree dogs to breeders, dog associations, microchip registries and government bodies.
+              Blockchains are an emergent technology that has broad applications.  Digital Dogs Australia harness that technology to make dog registrations more secure, transparent and affordable!</p>
+
+            <p class="lead mb-5" id="totalSupply"></p>
+
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">Demo</a>
           </div>
         </div>
       </div>
@@ -92,41 +96,44 @@
             <h4>
               <strong>Register</strong>
             </h4>
-            <p class="text-faded mb-0">Add your dog to the ethereum blockchain</p>
+            <p class="text-faded mb-0">Add your dog to the ethereum blockchain!</p>
           </div>
+
           <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
             <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-pencil"></i>
+              <i class="icon-magnifier"></i>
             </span>
             <h4>
-              <strong>Track</strong>
+              <strong>Search</strong>
             </h4>
-            <p class="text-faded mb-0">Trace an animals lineage</p>
+            <p class="text-faded mb-0">Trace an animals pedigree</p>
           </div>
+
           <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+            <span class="service-icon rounded-circle mx-auto mb-3">
+              <i class="icon-people"></i>
+            </span>
+            <h4>
+              <strong>Transfer</strong>
+            </h4>
+            <p class="text-faded mb-0">Securley transfer ownership</p>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
             <span class="service-icon rounded-circle mx-auto mb-3">
               <i class="icon-like"></i>
             </span>
             <h4>
-              <strong>Trade</strong>
-            </h4>
-            <p class="text-faded mb-0">Trade your dog securely</p>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-mustache"></i>
-            </span>
-            <h4>
               <strong>Attest</strong>
             </h4>
-            <p class="text-faded mb-0">I mustache you a question...</p>
+            <p class="text-faded mb-0">Verify the ownership of your animal via our smart contracts</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Callout -->
-    <section class="callout">
+    <section class="callout" id="register">
       <div class="container text-center">
         <h2 class="mx-auto mb-5">Register <em>your</em> dog on the blockchain!</h2>
             <div class="container-fluid">
@@ -142,6 +149,16 @@
                   </div>
 
                   <div class="form-group">
+                    <label class="radio-inline"><input type="radio" name="sex" value="0"/> Male </label>
+                    <label class="radio-inline"><input type="radio" name="sex" value="1"/> Female </label>
+                  </div> 
+
+                  <div class="form-group">
+                    <label for="name">Microchip</label>
+                    <input type="text" class="form-control" id="microchip">
+                  </div>
+
+                  <div class="form-group">
                     <label for="name">Dam ID</label>
                     <input type="number" class="form-control" id="dam" placeholder="0">
                   </div>
@@ -153,7 +170,7 @@
 
                   <div class="form-group">
                     <label for="name">Owner Public Key</label>
-                    <input type="text" class="form-control" id="owner" value="0x64f1cfb285350f7426b33685ed3c300aaf0937a2">
+                    <input type="text" class="form-control" id="owner" value="0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8">
                   </div>
 
                   <a class="btn btn-primary btn-xl" id="register">Register</a>
@@ -166,17 +183,8 @@
     <section class="content-section bg-primary text-white">
       <div class="container text-center">
         <h2 class="mb-4">Get in touch</h2>
-        <p>Lorem ipsum dolor sit amet, aliquam appareat id est, quodsi senserit disputationi vel ea. Has ei dicat vivendum, oblique equidem in eum, pri prima decore accommodare id. Ex sea vero habeo, an vim ignota ponderum, ancillae pericula per ne. Pri in impedit fuisset. Debitis feugait persecuti pri et, unum possim instructior pri ex, suas prima perfecto vix cu.</p>
+        <p>We understand this technology is new and confusing.  Please email woof @ digitaldogs.io to have a chat.</p>
       </div>
-    </section>
-
-    <!-- Map -->
-    <section id="contact" class="map">
-      <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-      <br/>
-      <small>
-        <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-      </small>
     </section>
 
     <!-- Footer -->
@@ -189,17 +197,17 @@
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com/bitcoinbrisbane">
+            <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com/digitaldogs_au">
               <i class="icon-social-twitter"></i>
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="https://www.github.com/bitcoinbrisbane">
+            <a class="social-link rounded-circle text-white" href="https://www.github.com/digitaldogs">
               <i class="icon-social-github"></i>
             </a>
           </li>
         </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019 0x02a78ebab43ed4fc7fd863978427937e5e0ea2b8</p>
+        <p class="text-muted small mb-0">Copyright &copy; Digital Dogs Australia 2019 Rinkeby: 0x08dd1ea8ca7c5f4264b9eb9272f506f07f94025c Mainnet: 0xa47a5021834986ddcba3528dd591b039a3b88cbd</p>
       </div>
     </footer>
 
@@ -219,14 +227,14 @@
     <script src="js/stylish-portfolio.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
-    <script type="text/javascript" src="./js/ethjs-abi.min.js"></script>
-    <script type="text/javascript" src="./js/ethjs-signer.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs-abi@0.2.1/lib/index.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs-signer@0.1.1/lib/index.min.js"></script>
 
     <script>
       $(document).ready(function() {
 
         const add_abi = [
-        {
+          {
             "constant": false,
             "inputs": [
               {
@@ -236,6 +244,14 @@
               {
                 "name": "dob",
                 "type": "uint256"
+              },
+              {
+                "name": "microchip",
+                "type": "string"
+              },
+              {
+                "name": "sex",
+                "type": "uint8"
               },
               {
                 "name": "dam",
@@ -252,159 +268,13 @@
             ],
             "name": "add",
             "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
+            "payable": true,
+            "stateMutability": "payable",
             "type": "function"
           }
         ]
 
-        const abi = [
-          {
-            "constant": false,
-            "inputs": [],
-            "name": "renounceOwnership",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "owner",
-            "outputs": [
-              {
-                "name": "",
-                "type": "address"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "isOwner",
-            "outputs": [
-              {
-                "name": "",
-                "type": "bool"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": false,
-            "inputs": [
-              {
-                "name": "newOwner",
-                "type": "address"
-              }
-            ],
-            "name": "transferOwnership",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-          },
-          {
-            "anonymous": false,
-            "inputs": [
-              {
-                "indexed": true,
-                "name": "_from",
-                "type": "address"
-              },
-              {
-                "indexed": true,
-                "name": "_to",
-                "type": "address"
-              },
-              {
-                "indexed": false,
-                "name": "_tokenId",
-                "type": "uint256"
-              }
-            ],
-            "name": "Transfer",
-            "type": "event"
-          },
-          {
-            "anonymous": false,
-            "inputs": [
-              {
-                "indexed": true,
-                "name": "_owner",
-                "type": "address"
-              },
-              {
-                "indexed": true,
-                "name": "_approved",
-                "type": "address"
-              },
-              {
-                "indexed": false,
-                "name": "_tokenId",
-                "type": "uint256"
-              }
-            ],
-            "name": "Approval",
-            "type": "event"
-          },
-          {
-            "anonymous": false,
-            "inputs": [
-              {
-                "indexed": true,
-                "name": "_owner",
-                "type": "address"
-              },
-              {
-                "indexed": true,
-                "name": "_operator",
-                "type": "address"
-              },
-              {
-                "indexed": false,
-                "name": "_approved",
-                "type": "bool"
-              }
-            ],
-            "name": "ApprovalForAll",
-            "type": "event"
-          },
-          {
-            "anonymous": false,
-            "inputs": [
-              {
-                "indexed": true,
-                "name": "previousOwner",
-                "type": "address"
-              }
-            ],
-            "name": "OwnershipRenounced",
-            "type": "event"
-          },
-          {
-            "anonymous": false,
-            "inputs": [
-              {
-                "indexed": true,
-                "name": "previousOwner",
-                "type": "address"
-              },
-              {
-                "indexed": true,
-                "name": "newOwner",
-                "type": "address"
-              }
-            ],
-            "name": "OwnershipTransferred",
-            "type": "event"
-          },
+        const totalSupply_abi = [
           {
             "constant": true,
             "inputs": [],
@@ -418,100 +288,14 @@
             "payable": false,
             "stateMutability": "view",
             "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [
-              {
-                "name": "_owner",
-                "type": "address"
-              }
-            ],
-            "name": "balanceOf",
-            "outputs": [
-              {
-                "name": "_balance",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [
-              {
-                "name": "_tokenId",
-                "type": "uint256"
-              }
-            ],
-            "name": "ownerOf",
-            "outputs": [
-              {
-                "name": "_owner",
-                "type": "address"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [
-              {
-                "name": "_tokenId",
-                "type": "uint256"
-              }
-            ],
-            "name": "exists",
-            "outputs": [
-              {
-                "name": "_exists",
-                "type": "bool"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": false,
-            "inputs": [
-              {
-                "name": "name",
-                "type": "string"
-              },
-              {
-                "name": "dob",
-                "type": "uint256"
-              },
-              {
-                "name": "dam",
-                "type": "uint256"
-              },
-              {
-                "name": "sire",
-                "type": "uint256"
-              },
-              {
-                "name": "owner",
-                "type": "address"
-              }
-            ],
-            "name": "add",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
           }
         ]
 
-        const contractAddress = '0x02a78ebab43ed4fc7fd863978427937e5e0ea2b8';
+        const contractAddress = '0x08dd1ea8ca7c5f4264b9eb9272f506f07f94025c';
         const eth = new Eth(new Eth.HttpProvider('https://rinkeby.infura.io'));
         //const eth = new Eth(new Eth.HttpProvider('http://digitaldogs.io:8545'));
-        const dog = eth.contract(abi).at(contractAddress);
+
+        const dog = eth.contract(totalSupply_abi).at(contractAddress);
 
         dog.totalSupply().then((result) => {
           $('#totalSupply').text(result[0].toString() + ' dogs registered');
@@ -519,30 +303,32 @@
 
         $("#register").click(function() {
 
-          //const owner = '0x64f1Cfb285350f7426B33685ED3c300aAF0937A2';
-          var owner = $("#owner").val();
-          console.log(owner);
-
-          eth.getTransactionCount(owner).then((nonce) => {
-            console.log(Number(nonce));
-
-            const name = $("#name").val();
+          //Contract owner
+          eth.getTransactionCount('0x64f1cfb285350f7426b33685ed3c300aaf0937a2').then((nonce) => {
+            
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const microchip = document.getElementById('microchip').value;
+            const dam = document.getElementById('dam').value;
+            const sire = document.getElementById('sire').value;
+            const sex = $('input[name=sex]:checked').val();
+            const owner = document.getElementById('owner').value;
 
             const privateKey = '0xcfdaa0e2b600272e752bd30d1bcbaf67bc1361942eb6f0236840a8903a65cd00';
-            const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, '1', '2', '3', '0x9e1525DA6AB3498dda99B97dc13E79f4c44b79d8']);
+            const addDogFunction = ethAbi.encodeMethod(add_abi[0], [name, dob, microchip, dam, sire, sex, owner]);
 
             const txParams = {
                 nonce: nonce,
                 gasPrice: '0x1406F40', 
                 gasLimit: '0x3D0900',
                 to: contractAddress, 
-                value: '0x00', 
+                value: '0xE8D4A51000', //'0x00'
                 data: addDogFunction,
                 chainId: 4
             }
           
             eth.sendRawTransaction(ethSigner.sign(txParams, privateKey)).then((txHash) => {
-              alert('Transaction Hash' + txHash);
+              alert('Transaction ' + txHash);
             });
         });
         });
